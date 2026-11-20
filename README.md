@@ -186,10 +186,12 @@ Compute: <for example "MacBook, runs of a few minutes, under 2 GB of memory" or 
 You are continuing an ICML research project. First read LOG.md, LITERATURE.md and IDEAS.md in the project folder. This step sets up the baselines and benchmarks that the chosen idea will be compared against. Do not try the idea yet. Fix problems yourself and only ask me if you are truly blocked.
 
 1. Pick the baselines.
-   Choose 3-5 current best methods for this problem. Start from LITERATURE.md and search again for anything newer. For each, write the paper and its year, what it does in one sentence, and why it is a strong, fair competitor. Simple older methods can be added as extra rows, but they do not count as the 3-5. If the idea is a finding or an explanation rather than a new method, the baselines are the recipes, models and measurement methods of the 3-5 papers whose results the finding must explain or overturn, run in your setting.
+   Choose 3-5 current best methods for this problem. Start from LITERATURE.md and search again for anything from the last 12 months. For each, write the paper and its year, what it does in one sentence, and why it is a strong, fair competitor. "Current best" means the models that recent papers in this area compare against and that top their benchmarks today, for example TD-MPC2 or DreamerV3 for world models, or MDLM-style masked diffusion for diffusion language models. A method more than 2 years old counts only if recent papers still use it as their main competitor; write which papers do. Simple older methods can be added as extra rows, but they do not count as the 3-5.
+   If the idea is a finding or an explanation rather than a new method, it still needs the current best models: run the finding on them, because a finding shown only on an older or simpler model will be called out of date. The recipes and measurement methods of the papers whose results the finding must explain or overturn come on top of that, as extra baselines.
+   Before setting anything up, write the list in BASELINES.md under "Baseline list" (method, paper, year, why it is current best, and which recent papers compare against it), add one LOG.md line, then continue.
 
 2. Pick the benchmarks.
-   Use the tasks, datasets and metrics that the baseline papers use. If you replace one with a smaller dataset to fit the compute, write which paper's benchmark it stands in for. Make them diverse: at least 2-3 different kinds of data or task (for example prose and code, not three sets of the same kind of text), and at least 2 model sizes, so that a win cannot come from one lucky setup. Skip benchmarks where every method at your scale scores near chance, because they cannot tell methods apart, and write why you skipped them. Keep a test set that is never used for tuning.
+   Use the tasks, datasets and metrics that the baseline papers use, including at least one standard benchmark of the area (for example DeepMind Control Suite for world models and control). If you replace one with a smaller dataset to fit the compute, write which paper's benchmark it stands in for. Make them diverse: at least 2-3 different kinds of data or task (for example prose and code, not three sets of the same kind of text), and at least 2 model sizes, so that a win cannot come from one lucky setup. Skip benchmarks where every method at your scale scores near chance, because they cannot tell methods apart, and write why you skipped them. Keep a test set that is never used for tuning.
 
 3. Fit the scale to the compute.
    Choose model size, data size and training length so one run fits the compute I gave. Keep a modern architecture and keep the conditions that matter at large scale. Write down what you scaled down and why the result should still carry over to larger models.
@@ -213,11 +215,14 @@ Add a short entry to LOG.md. Never report a number you did not measure.
 
 ### Your turn 2: check the baselines and the compute
 
-Ask the agent:
+Before step 3 starts, check the baseline list in BASELINES.md yourself. Open the 2-3 newest papers in this area (from LITERATURE.md or a quick search) and look at whom they compare against. Every method they all use should be on our list. If a baseline is more than 2 years old and recent papers no longer use it, or if no baseline is the area's current best model, or if no benchmark is the area's standard one, send the agent back to step 2 with the missing names. Do not start step 3 until the list passes.
+
+Then ask the agent:
 - Explain each baseline in one simple sentence.
+- Which is the current best model in this area, and is it on our list? Which recent papers compare against it?
 - Why these baselines and not others? Is any newer method missing?
 - Does the order of the baselines in our table match what their papers report? If not, why?
-- How are the benchmarks different from each other? Could a method win on all of them by one trick?
+- How are the benchmarks different from each other? Which one is the area's standard benchmark? Could a method win on all of them by one trick?
 - Was the test data ever used to choose settings?
 - How far is our setup from the papers' setups (model size, data, training length)?
 - Which baselines use official code, and which did the agent write itself?
