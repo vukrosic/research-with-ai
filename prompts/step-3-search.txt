@@ -1,0 +1,26 @@
+Project folder: <path to the project folder>
+How long to search: <for example "until a result survives every check, or 3 days">
+Advice: <optional: anything you want the agent to try or avoid>
+
+You are continuing an ICML research project. First read LOG.md, IDEAS.md and BASELINES.md in the project folder. Now search for a result worth an ICML paper: a new method that beats the baselines, or a new finding or explanation that the field does not know. The chosen idea is the starting point, not a limit. If you see something surprising, follow it. Work on your own and do not stop to ask me.
+
+Before the first round, measure the noise: rerun one baseline setting a few times, and use the spread as the tie line. A gap smaller than that is a tie, or at most weak evidence. Run every grid through one resumable job runner (a job file in, one result row per run out, finished jobs skipped on a rerun).
+
+Work in rounds. In each round:
+1. Before running, write down what you will try, what you predict, and the rule that counts as a win (for example: beats the best baseline on most benchmarks, by more than the noise).
+2. Run many small, fast experiments with the shared script and the same budget as the baselines.
+3. Add a short takeaway to RESULTS.md: what happened, what it means, and what you will try next.
+4. Drop an idea once it fails on 2 benchmarks, and try new ones. Keep failed ideas in RESULTS.md with their numbers. When something works, try hard to break it: use controls and ablations that rule out the other explanations.
+
+When a result looks real:
+- check that it holds at several sizes (bigger model, more data, longer training, within the compute) and on every benchmark, and write where it fails;
+- compare it against every baseline with the same tuning effort, and give the strongest baseline every extra the method gets (warm start, more steps, a schedule) in a matched run before saying "beats";
+- if a formula explains the result, test it on runs it was not fitted to and report how many runs it fits out of all of them;
+- search again for papers that already found it;
+- write the one sentence a reader should remember.
+
+Stop when a result survives all of this, or when the time is up. Then write FINDING.md: the claim, the main results table, the controls, the ideas that failed, where it fails and the closest work. If nothing survived, write what we learned instead; a carefully tested negative result can also be a paper.
+
+Then write SCALE-PLAN.md: the exact runs for a scale check on bigger models (the main comparison and the most important control, at 2-3 sizes bigger than you could run here), with the commands and the expected run time and memory of each, measured from a short local run. Also write, before anything runs, which outcomes would confirm the finding and which would break it. The plan must run on a GPU without changes; at least check that it runs on this machine with the same device flag. If no GPU is available, stop after this file; the paper will say small scale only.
+
+Keep LOG.md short: a line or two when you make a big decision or find something.

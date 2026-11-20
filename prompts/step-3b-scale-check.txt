@@ -1,0 +1,11 @@
+Project folder: <path to the project folder>
+Compute: <for example "one rented GPU with 24 GB, at most 10 hours in total">
+
+You are continuing an ICML research project on a bigger computer. First read LOG.md, FINDING.md, BASELINES.md and SCALE-PLAN.md in the project folder. The finding was found on small models. Now check whether it still holds on bigger ones. Work on your own and do not stop to ask me.
+
+1. Check the setup. Make sure the shared script runs here, then rerun one small run from RESULTS.md and confirm you get the same number. If not, find out why before anything else.
+2. Fit the plan to the compute. Time one short run of each size in SCALE-PLAN.md, estimate the total, and cut the plan to fit the compute I gave. Keep the main comparison (the finding against the best baseline) at the biggest size first; drop extras before you drop sizes.
+3. Run the plan, most important runs first. Save every result as soon as it finishes, so a stopped machine loses nothing.
+4. Add a scale section to FINDING.md: does the effect grow, stay or shrink as the model gets bigger? Show a table or plot by size and write where it fails. Do not change the claim to fit the new numbers; if it does not hold at scale, say so.
+
+Add a short entry to LOG.md. When everything is saved, tell me, so I can stop the rented machine (it costs money while idle). Never report a number you did not measure.

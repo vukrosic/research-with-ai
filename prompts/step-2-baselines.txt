@@ -1,0 +1,30 @@
+Project folder: <path to the folder from step 1>
+Chosen idea: <the idea you picked from IDEAS.md, in your own words>
+Compute: <for example "MacBook, runs of a few minutes, under 2 GB of memory" or "one GPU with 24 GB">
+
+You are continuing an ICML research project. First read LOG.md, LITERATURE.md and IDEAS.md in the project folder. This step sets up the baselines and benchmarks that the chosen idea will be compared against. Do not try the idea yet. Fix problems yourself and only ask me if you are truly blocked.
+
+1. Pick the baselines.
+   Choose 3-5 current best methods for this problem. Start from LITERATURE.md and search again for anything newer. For each, write the paper and its year, what it does in one sentence, and why it is a strong, fair competitor. Simple older methods can be added as extra rows, but they do not count as the 3-5. If the idea is a finding or an explanation rather than a new method, the baselines are the recipes, models and measurement methods of the 3-5 papers whose results the finding must explain or overturn, run in your setting.
+
+2. Pick the benchmarks.
+   Use the tasks, datasets and metrics that the baseline papers use. If you replace one with a smaller dataset to fit the compute, write which paper's benchmark it stands in for. Make them diverse: at least 2-3 different kinds of data or task (for example prose and code, not three sets of the same kind of text), and at least 2 model sizes, so that a win cannot come from one lucky setup. Skip benchmarks where every method at your scale scores near chance, because they cannot tell methods apart, and write why you skipped them. Keep a test set that is never used for tuning.
+
+3. Fit the scale to the compute.
+   Choose model size, data size and training length so one run fits the compute I gave. Keep a modern architecture and keep the conditions that matter at large scale. Write down what you scaled down and why the result should still carry over to larger models.
+   Before running anything at full size, do one test run and measure its peak memory and wall time. If it goes over the memory limit or takes much longer than the run time I gave, make it smaller and measure again. Only then launch the rest, and never run more at once than the memory allows.
+
+4. Get the code.
+   Search for the official code of every baseline. If it exists and fits the compute, use it. If the full repo is too big for the compute, copy the method's core (loss, schedule, settings) from the official code, not from the paper text, and check yours against it line by line. Write the repo link, commit and file for each. If no official code exists, implement the method from the paper, following its equations and settings, and write down every detail you had to guess. Put all methods behind one shared training and evaluation script, so they all get the same data, the same budget and the same tuning effort. Make the script run unchanged on a GPU as well (one device setting), so a scale check later needs no rewrite.
+
+5. Check the setup before trusting any number.
+   - Each baseline shows the behavior its paper reports, at least in direction (for example, it beats the simple baseline). If not, find out why.
+   - A broken run (shuffled labels, random weights or no training) scores badly, so the benchmark can tell good from bad.
+   - The test data never appears in training, and tuning uses only the validation data.
+   - Every method got the same budget and the same tuning effort.
+   If a check fails, fix it before moving on and write what was wrong.
+
+6. Run every baseline on every benchmark and write BASELINES.md.
+   It holds the results table, what each check showed, which code is official and which is our own implementation, the guesses we made, a table of each paper's setup (model size, data, training length) next to ours, and the measured time and peak memory of one run.
+
+Add a short entry to LOG.md. Never report a number you did not measure.

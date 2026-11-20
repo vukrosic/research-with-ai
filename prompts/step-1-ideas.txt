@@ -1,0 +1,51 @@
+What I want to work on: <write your topic, research area, paper links, PDF paths, repo links or a short explanation. If you don't know what you want to work on, write: "I don't know what I want to work on, discover something for me.">
+Topics to avoid: <optional: topics that are already taken, for example by other projects or people you work with, or "none">
+
+You are starting an ICML research project. This first step is literature research and idea generation. Do not run experiments yet. Work through these steps in order and fix problems yourself. Only ask me if you are truly blocked.
+
+If I did not give a topic, pick one yourself: choose an active area of machine learning (for example LLM pretraining, post-training, optimizers, world models or robot learning) where small experiments on my computer can show something new (for example, a model of 1-10M parameters trained on a few million tokens), and explain why you picked it. If I gave an area but not a topic, pick a sub-topic inside it with the same rules. Either way, first do 3-5 quick searches to choose the sub-topic, write it and the reason in LOG.md, and only then map the field inside it.
+
+Create a new folder for this project with a short name that says what it is about, and keep everything you make inside it: notes, code and results. If I gave you my own notes or earlier projects, read them so the topic is new to me. Keep a short LOG.md in it, starting today as Day 1: add a line or two with the date only when you make a decision or find something important.
+
+A good ICML paper teaches the field something true it did not know: a new method, a new finding, a new explanation of why something works or fails, a new benchmark that exposes a weakness, or a surprising negative result. It must matter to many researchers and be provable with experiments that compare against the current best methods.
+
+1. Understand the topic.
+   Explain in plain words what problem it is about, how progress is measured, and give one concrete example.
+
+2. Map the field.
+   Search arXiv, OpenReview, Semantic Scholar, GitHub and the web, with whatever search tools you have, with a focus on the last 2 years. Find the 15-30 most relevant papers for the main map; papers you find later, during the novelty check, go in a separate "also checked" list. For each: link, year, one sentence on what it does, its main result, and whether code exists (a project page or "code released" on the paper is enough; mark links you did not open). Group them by approach. Name the 3-5 current best methods with code and the benchmarks they report on. If the topic is a finding or an explanation rather than a new method (for example a scaling or data question), name instead the 3-5 papers whose results the finding must explain or overturn. For each famous result, check whether a newer paper beat it or overturned it; the most cited paper is often not the current best.
+
+3. Find the gaps.
+   List what is not done or not understood. Look for:
+   - tricks everyone uses that nobody explains;
+   - known failures of the best methods that nobody fixed;
+   - results that disagree between papers;
+   - claims tested only in one setting, size or task;
+   - two lines of work that never met;
+   - assumptions everyone makes that nobody tested.
+   For each gap, cite the papers that show it is a gap.
+
+4. Generate ideas.
+   Write 10-20 candidate ideas that fill those gaps. For each, write:
+   - the idea in one sentence;
+   - what type of contribution it is (method, finding, explanation, benchmark, negative result);
+   - the result we expect, and the experiment that would kill it;
+   - if it fails, whether the negative result is still worth reporting (yes or no, and why);
+   - which current best method it must beat or explain.
+
+5. Check novelty.
+   For every idea, do a quick search for papers that already did it. For the 5 most promising, search deeply and name the 3 closest papers and say exactly what differs. Drop any idea where a paper already does the same thing, and any idea that overlaps a topic to avoid. Write "the closest work I found is X", never "nobody has done this".
+
+6. Rank the survivors.
+   Score each surviving idea from 1 to 5 on:
+   - novelty: would a strong researcher in this area be surprised?
+   - significance: who would change what they do if it works?
+   - testability: can a small-scale experiment on my computer show it in minutes per run, with memory under about 2 GB?
+   - simplicity: can the finding be said in one sentence?
+   Use these anchors: 5 = excellent (for novelty: a strong researcher would bet on the opposite result), 3 = fair (half-expected), 1 = poor (already known). Add up the scores, keep the top 3-5 and explain the ranking. Then describe in 3-5 lines the small-scale testbed the top ideas would share: what data or simulator, the model sizes, and the time and memory of one run.
+
+7. Write two files.
+   - LITERATURE.md: the paper map, the current best methods and benchmarks, and a table of what is done and what is not.
+   - IDEAS.md: the ranked ideas, each with its closest papers, its expected result and its kill experiment, plus the dropped ideas with the paper that killed each one.
+
+Never invent a paper, a citation or a number. Link every paper you mention. If you are not sure a paper exists, say so. Label every number by where it came from: (paper) if you read it in the paper, (abstract), (search summary), or (training data, not re-checked). Ideas are guesses until experiments test them, so keep several, not one.
